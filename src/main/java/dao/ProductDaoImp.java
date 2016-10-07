@@ -32,8 +32,8 @@ public class ProductDaoImp extends BaseDao implements ProductDao {
         //插入语句
         String sql = "insert into easybuy_product(ep_name,ep_description,"
                 + "ep_price,ep_stock,epc_id,"
-                + "epc_child_id,ep_file_name)"
-                + "values(?,?,?,?,?,?,?)";
+                + "epc_child_id,ep_file_name,ep_barcode)"
+                + "values(?,?,?,?,?,?,?,?)";
 
         //SQL参数
         Object[] param = {
@@ -43,7 +43,8 @@ public class ProductDaoImp extends BaseDao implements ProductDao {
                 product.getEp_stock(),
                 product.getEpc_id(),
                 product.getEpc_child_id(),
-                product.getEp_file_name()
+                product.getEp_file_name(),
+                product.getEp_barcode()
         };
 
         result = executeUpdate(sql, param);
@@ -72,7 +73,7 @@ public class ProductDaoImp extends BaseDao implements ProductDao {
     public int updateProduct(Product product) {
         int result = 0;
         String sql = "update easybuy_product set ep_name=?,ep_description=?,ep_price=?,"
-                + "ep_stock=?,epc_id=?,epc_child_id=?,ep_file_name=?"
+                + "ep_stock=?,epc_id=?,epc_child_id=?,ep_file_name=?,ep_barcode=?"
                 + " where ep_id=?";
         Object[] param = {
                 product.getEp_name(),
@@ -82,6 +83,7 @@ public class ProductDaoImp extends BaseDao implements ProductDao {
                 product.getEpc_id(),
                 product.getEpc_child_id(),
                 product.getEp_file_name(),
+                product.getEp_barcode(),
                 product.getEp_id()
         };
         result = executeUpdate(sql, param);
@@ -116,6 +118,7 @@ public class ProductDaoImp extends BaseDao implements ProductDao {
                 product.setEpc_id(resultSet.getInt("epc_id"));
                 product.setEpc_child_id(resultSet.getInt("epc_child_id"));
                 product.setEp_file_name(resultSet.getString("ep_file_name"));
+                product.setEp_barcode(resultSet.getString("ep_barcode"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -173,7 +176,7 @@ public class ProductDaoImp extends BaseDao implements ProductDao {
             StringBuffer selectSql = new StringBuffer();
             selectSql.append("select ep_id,ep_name,ep_description,"
                     + "ep_price,ep_stock,epc_id,"
-                    + "epc_child_id,ep_file_name from easybuy_product");
+                    + "epc_child_id,ep_file_name,ep_barcode from easybuy_product");
             selectSql.append(" limit ");
             selectSql.append((pageIndex - 1) * pageSize);
             selectSql.append(",");
@@ -193,6 +196,7 @@ public class ProductDaoImp extends BaseDao implements ProductDao {
                 product.setEpc_id(rs.getInt("epc_id"));
                 product.setEpc_child_id(rs.getInt("epc_child_id"));
                 product.setEp_file_name(rs.getString("ep_file_name"));
+                product.setEp_barcode(rs.getString("ep_barcode"));
                 list.add(product);
             }
         } catch (Exception ex) {
