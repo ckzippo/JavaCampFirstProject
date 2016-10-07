@@ -34,22 +34,98 @@
 ## 数据库设计
     数据库采用MySQL, 所有表格编码方式为UTF-8。
     数据库名称: easybuy
+    数据库语句可以才src/main/resources/sql文件夹下找到,并附带一些样例数据可以直接导入
     数据库涉及到如下几张表:
     * easybuy_user: 用户信息表
       PS:由于我先根据需求文档中的建表信息创建了数据库并写好了对应的接口,但是在注册页面中发现需要使用"姓名"这个字段。我懒得改数据库设计和对应的接口操作。
       构建语句: 
+      `DROP TABLE IF EXISTS `easybuy_user`;
+       CREATE TABLE `easybuy_user` (
+         `eu_user_id` int(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+         `eu_user_name` varchar(50) NOT NULL,
+         `eu_password` varchar(50) NOT NULL,
+         `eu_sex` int(1) DEFAULT NULL,
+         `eu_birthday` datetime DEFAULT NULL,
+         `eu_identity_code` varchar(20) DEFAULT NULL,
+         `eu_email` varchar(50) DEFAULT NULL,
+         `eu_mobile` varchar(11) DEFAULT NULL,
+         `eu_address` varchar(100) DEFAULT NULL,
+         `eu_headimage` varchar(400) DEFAULT NULL,
+         `eu_status` int(1) DEFAULT NULL COMMENT '1 普通用户 2 管理员',
+         PRIMARY KEY (`eu_user_id`)
+       ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;`
     * easybuy_news: 新闻表
       构建语句:
+      `DROP TABLE IF EXISTS `easybuy_news`;
+       CREATE TABLE `easybuy_news` (
+         `en_id` int(20) NOT NULL AUTO_INCREMENT,
+         `en_title` varchar(100) DEFAULT NULL,
+         `en_content` text,
+         `en_create_time` datetime DEFAULT NULL,
+         PRIMARY KEY (`en_id`)
+       ) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
     * easybuy_comment:留言表
       构建语句:
+      `DROP TABLE IF EXISTS `easybuy_comment`;
+       CREATE TABLE `easybuy_comment` (
+         `ec_id` int(50) NOT NULL AUTO_INCREMENT,
+         `ec_reply` varchar(200) DEFAULT NULL,
+         `ec_content` text,
+         `ec_create_time` datetime DEFAULT NULL,
+         `ec_reply_time` datetime DEFAULT NULL,
+         `ec_nick_name` varchar(50) DEFAULT NULL,
+         PRIMARY KEY (`ec_id`)
+       ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;`
     * easybuy_product: 商品信息表
       构建语句:
+      `DROP TABLE IF EXISTS `easybuy_product`;
+       CREATE TABLE `easybuy_product` (
+         `ep_id` int(40) NOT NULL AUTO_INCREMENT,
+         `ep_name` varchar(100) DEFAULT NULL,
+         `ep_description` varchar(500) DEFAULT NULL,
+         `ep_price` double DEFAULT NULL,
+         `ep_stock` int(20) DEFAULT NULL,
+         `epc_id` int(10) DEFAULT NULL,
+         `epc_child_id` int(10) DEFAULT NULL,
+         `ep_file_name` varchar(200) DEFAULT NULL,
+         `ep_barcode` varchar(100) DEFAULT NULL,
+         PRIMARY KEY (`ep_id`)
+       ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;`
     * easybuy_product_category: 商品分类表
       构建语句:
+      `DROP TABLE IF EXISTS `easybuy_product_category`;
+       CREATE TABLE `easybuy_product_category` (
+         `epc_id` int(20) NOT NULL AUTO_INCREMENT,
+         `epc_name` varchar(100) NOT NULL,
+         `epc_parent_id` int(20) NOT NULL,
+         PRIMARY KEY (`epc_id`)
+       ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;`
     * easybuy_order: 订单表
       构建语句:
+      `DROP TABLE IF EXISTS `easybuy_order`;
+       CREATE TABLE `easybuy_order` (
+         `eo_id` int(40) NOT NULL AUTO_INCREMENT,
+         `eo_user_id` int(20) NOT NULL,
+         `eo_user_name` varchar(50) NOT NULL,
+         `eo_user_address` varchar(200) NOT NULL,
+         `eo_create_time` datetime NOT NULL,
+         `eo_cost` double NOT NULL,
+         `eo_status` int(4) NOT NULL COMMENT '1 下单 2 审核通过 3 配货 4 送货中 5 收货并确认',
+         `eo_type` int(4) NOT NULL COMMENT '1 货到付款 2 网上支付',
+         PRIMARY KEY (`eo_id`)
+       ) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
     * easybuy_order_detail: 订单明细表
       构建语句:
+      `DROP TABLE IF EXISTS `easybuy_order_detail`;
+       CREATE TABLE `easybuy_order_detail` (
+         `eod_id` int(40) NOT NULL AUTO_INCREMENT,
+         `eo_id` int(40) NOT NULL,
+         `ep_id` int(40) NOT NULL,
+         `eod_quantity` int(40) NOT NULL,
+         `eod_cost` double(20,0) NOT NULL,
+         PRIMARY KEY (`eod_id`)
+       ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+`
       
 ## 完成内容
 >   完成所有数据结构的定义。放置在entity包中
