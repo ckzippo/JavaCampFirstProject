@@ -41,7 +41,7 @@ public class CommentBizImp extends BaseDao implements CommentBiz {
      */
     public boolean modComment(Comment comment) {
         CommentDao commentDao = new CommentDaoImp();
-        return commentDao.deleteComment(comment) == 1;
+        return commentDao.updateComment(comment) == 1;
     }
 
     /**

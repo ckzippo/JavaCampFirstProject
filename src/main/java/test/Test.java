@@ -1,6 +1,7 @@
 package test;
 
 import biz.*;
+import dao.CommentDao;
 import dao.UserDao;
 import dao.UserDaoImp;
 import entity.*;
@@ -92,5 +93,12 @@ public class Test {
             System.out.println(pro);
         }
 
+        // 留言操作
+        CommentBiz commentBiz = new CommentBizImp();
+        List<Comment> list1 = commentBiz.getCommentsByPage(1,10);
+        for (Comment com :
+                list1) {
+            System.out.println(com);
+        }
     }
 }

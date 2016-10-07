@@ -49,7 +49,7 @@ public class userPageControlServ extends HttpServlet {
         int totalCount = userBiz.getUserCounts();
 
         // 获取总页码
-        int totalPageIndex = totalCount / pageSize == 0 ? totalCount
+        int totalPageIndex = totalCount % pageSize == 0 ? totalCount
                 / pageSize : totalCount / pageSize + 1;
 
         HttpSession session = req.getSession();

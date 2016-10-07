@@ -7,6 +7,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -42,6 +44,7 @@
     //分页结果集
     List<Comment> commentlst = (List<Comment>) session
             .getAttribute("commentlst");
+
     //当前页页码
     Integer currentPageIndex = (Integer) session
             .getAttribute("currentCommentPageIndex");
@@ -69,7 +72,7 @@
                 <dt>订单管理</dt>
                 <dd><a href="order.html">订单管理</a></dd>
                 <dt>留言管理</dt>
-                <dd><a href="commentPag">留言管理</a></dd>
+                <dd><a href="commentPage">留言管理</a></dd>
                 <dt>新闻管理</dt>
                 <dd><em><a href="news-add.html">新增</a></em><a href="news.html">新闻管理</a></dd>
             </dl>
@@ -100,7 +103,7 @@
                                     <td class="w1 c">未回复</td>
                                 </c:when>
                             </c:choose>
-                            <td class="w1 c"><a href="guestbook-modify.jsp?userid=${comment.ec_id}">修改</a> <a href="javascript:Delete(${comment.ec_id});">删除</a></td>
+                            <td class="w1 c"><a href="guestbook-modify.jsp?ecid=${comment.ec_id}">修改</a> <a href="javascript:Delete(${comment.ec_id});">删除</a></td>
                         </tr>
                     </c:forEach>
                 </c:if>

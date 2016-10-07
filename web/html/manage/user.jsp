@@ -20,14 +20,14 @@
 <body>
 <div id="header" class="wrap">
     <div id="logo"><img src="../images/logo.gif" /></div>
-    <div class="help"><a href="../index.html">返回前台页面</a></div>
+    <div class="help"><a href="../index.jsp">返回前台页面</a></div>
     <div class="navbar">
         <ul class="clearfix">
             <li><a href="index.jsp">首页</a></li>
             <li class="current"><a href="user.jsp">用户</a></li>
             <li><a href="product.html">商品</a></li>
             <li><a href="order.html">订单</a></li>
-            <li><a href="guestbook.html">留言</a></li>
+            <li><a href="commentPage">留言</a></li>
             <li><a href="news.html">新闻</a></li>
         </ul>
     </div>
@@ -64,14 +64,14 @@
         <div class="box">
             <dl>
                 <dt>用户管理</dt>
-                <dd><em><a href="user-add.jsp">新增</a></em><a href="user.jsp">用户管理</a></dd>
+                <dd><em><a href="user-add.jsp">新增</a></em><a href="userPage">用户管理</a></dd>
                 <dt>商品信息</dt>
                 <dd><em><a href="productClass-add.html">新增</a></em><a href="productClass.html">分类管理</a></dd>
                 <dd><em><a href="product-add.html">新增</a></em><a href="product.html">商品管理</a></dd>
                 <dt>订单管理</dt>
                 <dd><a href="order.html">订单管理</a></dd>
                 <dt>留言管理</dt>
-                <dd><a href="guestbook.html">留言管理</a></dd>
+                <dd><a href="commentPage">留言管理</a></dd>
                 <dt>新闻管理</dt>
                 <dd><em><a href="news-add.html">新增</a></em><a href="news.html">新闻管理</a></dd>
             </dl>

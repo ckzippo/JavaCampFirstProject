@@ -45,7 +45,7 @@ public class commentPageControlServ extends HttpServlet {
         int totalCount = commentBiz.getCommentCounts();
 
         // 获取总页码
-        int totalPageIndex = totalCount / pageSize == 0 ? totalCount
+        int totalPageIndex = totalCount % pageSize == 0 ? totalCount
                 / pageSize : totalCount / pageSize + 1;
 
         HttpSession session = req.getSession();
@@ -56,9 +56,9 @@ public class commentPageControlServ extends HttpServlet {
         session.setAttribute("lastCommentPageIndex", pageIndex - 1);
         session.setAttribute("nextCommentPageIndex", pageIndex + 1);
         //获取分页结果集
-        List<Comment> pagelst = commentBiz.getCommentsByPage(pageIndex, pageSize);
-        session.setAttribute("commentlst", pagelst);
+        List<Comment> commentlst = commentBiz.getCommentsByPage(pageIndex, pageSize);
+        session.setAttribute("commentlst", commentlst);
 
-        resp.sendRedirect("gestbook.jsp");
+        resp.sendRedirect("guestbook.jsp");
     }
 }
